@@ -1,0 +1,23 @@
+{
+    "name": "bluetooth-beacons",
+    "version": "0.0.0",
+    "description": "A Bluetooth Beacons service",
+    "license": "MIT",
+    "dependencies": {
+        "core": "*",
+        "bluetooth": "*"
+    },
+    "files": [
+        "README.md",
+        "bluetooth.ts",
+        "BluetoothBeaconService.cpp",
+        "BluetoothBeaconService.h",
+        "beacon.cpp",
+        "shims.d.ts",
+        "enums.d.ts"
+    ],
+    "testFiles": [
+        "tests.ts"
+    ],
+    "public": true
+}
