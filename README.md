@@ -4,18 +4,20 @@ This PXT package allows the micro:bit to act as iBeacon / AltBeacon advertiser.
 
 ## Usage
 
+On MakeCode workspace, open the menu item `Add Package...`, and specify the package id `github:kshoji/pxt-bluetooth-beacons`.
+
 ### iBeacon
 To advertise BLE iBeacon packets, write code like this.
 
 ```blocks
-bluetooth.advertiseIBeacon("E20A39F4-73F5-4BC4-A12F-17D1AD07A961", 1, 2, 0xC8);
+bluetooth.advertiseIBeacon("E20A39F4-73F5-4BC4-A12F-17D1AD07A961", 1, 2, -56);
 ```
 
 Arguments: `uuid`, `majorId`, `minorId`, and `txPower`. 
 
 * The `uuid` argument is string style, and it can omit the hyphens.
 * The `majorId` `minorId` arguments are numbers from 0 to 65535.
-* The `txPower` argument is number from -128 to 127.
+* The `txPower` argument is a number (dBm) from -128 to 127.
 
 ### AltBeacon
 To advertise BLE AltBeacon packets, write code like this.
@@ -35,7 +37,7 @@ Arguments: `manufacturerId`, `beaconId`, and `txPower`.
 
 * The `manufacturerId` argument is a number from 0 to 65535.
 * The `beaconId` argument is a buffer with 20 bytes.
-* The `txPower` argument is a number from 0 to -127.
+* The `txPower` argument is a number (dBm) from 0 to -127.
 
 ## Supported targets
 
@@ -46,7 +48,7 @@ Arguments: `manufacturerId`, `beaconId`, and `txPower`.
 ## License
 
 Source code:
-MIT
+[MIT](https://github.com/kshoji/pxt-bluetooth-beacons/blob/master/LICENSE)
 
 
 icon.png:

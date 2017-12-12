@@ -1,6 +1,8 @@
 /** 
  * A class to advertise BLE Beacons
  */
+#include <algorithm>
+
 #include "MicroBit.h"
 #include "pxt.h"
 #include "ble/GapAdvertisingData.h"
@@ -27,6 +29,12 @@ const uint8_t ALTBEACON_PAYLOAD[] = {
     0x00,                                                       // reference RSSI (changeable)
     0x00,                                                       // Reserved (changeable)
 };                                                              // Length 26
+
+void reverse(const uint8_t *start, int32_t size)
+{
+    uint8_t *istart = const_cast<uint8_t *>(start), *iend = istart + size;
+    std::reverse(istart, iend);
+}
 }
 
 /**
@@ -44,7 +52,10 @@ void BluetoothBeaconService::advertiseIBeacon(ManagedString uuid, uint16_t major
     UUID uuidData = UUID(uuid.toCharArray());
     if (uuidData.getLen() == 16)
     {
-        memcpy(&iBeaconPayload[4], uuidData.getBaseUUID(), 16);
+        // byte order is reversed
+        const uint8_t *baseUUID {uuidData.getBaseUUID()};
+        reverse(baseUUID, 16);
+        memcpy(&iBeaconPayload[4], baseUUID, 16);
         iBeaconPayload[20] = (major >> 8) & 0xff;
         iBeaconPayload[21] = major & 0xff;
         iBeaconPayload[22] = (minor >> 8) & 0xff;
